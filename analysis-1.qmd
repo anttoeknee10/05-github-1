@@ -1,6 +1,33 @@
 ---
-title: "Analysis 1"
+title: "A Beautiful Graphic"
 format: html
+author: Anthony Gao
+execute:
+  echo: false
 ---
-
 Anthony is a data maestro!
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r}
+#| message: false
+ggplot(diamonds, aes(x = carat, y = price, color = clarity)) +
+  geom_point(alpha = 0.3, size = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.7) +
+  scale_color_brewer(palette = "RdYlGn") +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(
+    title = "Diamond Price by Carat Weight",
+    subtitle = "Colored by clarity grade, from I1 (worst) to IF (best)",
+    x = "Carat",
+    y = "Price",
+    color = "Clarity"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "right"
+  )
+```
